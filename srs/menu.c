@@ -80,7 +80,6 @@ int get_menu_choice(void) {
     if (len > 0 && input[len - 1] == '\n') {
         input[len - 1] = '\0';  
     } else {
-        //The input was too long - removes the remaining characters from buffer
         int c;
         while ((c = getchar()) != '\n' && c != EOF);
     }

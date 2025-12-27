@@ -41,7 +41,6 @@ void clear_input_buffer(void) {
    
    Safety checks:
    1. Input cannot be empty
-   2. Input cannot be too long
    3. Removes the newline character at the end
  */
 bool get_string_input(char *buffer, int max_len, const char *prompt) {
@@ -65,12 +64,7 @@ bool get_string_input(char *buffer, int max_len, const char *prompt) {
         printf("Error: Input cannot be empty.\n");
         return false;
     }
-    
-    // Check if the input is too long 
-    if (strlen(buffer) >= (size_t)(max_len - 1)) {
-        printf("Error: Input is too long.\n");
-        return false;
-    }
+
     
     return true;
 }
@@ -158,7 +152,6 @@ bool get_int_input(int *value, const char *prompt) {
   Examples:
     "1234" → Valid
     "12" → Invalid (too short)
-    "12345" → Invalid (too long)
     "12a4" → Invalid (contains letter)
  */
 bool is_valid_pin(const char *pin) {
