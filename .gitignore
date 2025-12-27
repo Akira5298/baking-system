@@ -15,7 +15,6 @@ database/
 *.pdf
 *.doc
 *.docx
-*.md
 
 # IDE and editor files
 .vscode/
