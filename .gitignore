@@ -1,22 +1,17 @@
-# Compiled executables
 banking_system
 banking_system.exe
 *.out
 *.o
 
-# Build directory
 build/
 
-# Database files
 database/
 
-# Text documents
 *.txt
 *.pdf
 *.doc
 *.docx
 
-# IDE and editor files
 .vscode/
 .idea/
 .zencoder/
@@ -25,13 +20,10 @@ database/
 *.swo
 *~
 
-# Mac OS
 .DS_Store
 
-# Windows
 Thumbs.db
 desktop.ini
 
-# Backup files
 *.bak
 *.backup
