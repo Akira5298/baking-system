@@ -40,4 +40,4 @@ void display_session_info(int account_count);
  */
 int get_menu_choice(void);
 
-#endif
+#endif // MENU_H
