@@ -136,8 +136,16 @@ void create_account(void) {
         return;
     }
     
+    if (!is_valid_name(acc.name)) {
+        return;
+    }
+    
     if (!get_string_input(acc.id_number, MAX_ID_LEN, "Enter ID number: ")) {
         printf("Error: Failed to read ID number.\n");
+        return;
+    }
+    
+    if (!is_valid_id(acc.id_number)) {
         return;
     }
     

@@ -30,6 +30,11 @@ bool get_string_input(char *buffer, int max_len, const char *prompt) {
         return false;
     }
     
+    if (strlen(buffer) >= (size_t)(max_len - 1)) {
+        printf("Error: Input is too long.\n");
+        return false;
+    }
+    
     return true;
 }
 
@@ -96,6 +101,49 @@ bool is_valid_amount(double amount, double max) {
     if (amount > max) {
         printf("Error: Amount cannot exceed RM%.2f per operation.\n", max);
         return false;
+    }
+    
+    if (amount > 999999999.99) {
+        printf("Error: Amount is too large.\n");
+        return false;
+    }
+    
+    double cents = amount * 100;
+    if (cents != (long long)cents) {
+        printf("Error: Amount cannot have more than 2 decimal places.\n");
+        return false;
+    }
+    
+    return true;
+}
+
+bool is_valid_name(const char *name) {
+    if (strlen(name) < 2) {
+        printf("Error: Name must be at least 2 characters long.\n");
+        return false;
+    }
+    
+    for (size_t i = 0; i < strlen(name); i++) {
+        if (!isalpha(name[i]) && name[i] != ' ' && name[i] != '.' && name[i] != '-') {
+            printf("Error: Name can only contain letters, spaces, hyphens, and periods.\n");
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+bool is_valid_id(const char *id) {
+    if (strlen(id) < 3) {
+        printf("Error: ID must be at least 3 characters long.\n");
+        return false;
+    }
+    
+    for (size_t i = 0; i < strlen(id); i++) {
+        if (!isalnum(id[i]) && id[i] != '-' && id[i] != '_') {
+            printf("Error: ID can only contain letters, numbers, hyphens, and underscores.\n");
+            return false;
+        }
     }
     
     return true;

@@ -11,6 +11,8 @@ bool get_int_input(int *value, const char *prompt);
 
 bool is_valid_pin(const char *pin);
 bool is_valid_amount(double amount, double max);
+bool is_valid_name(const char *name);
+bool is_valid_id(const char *id);
 
 void create_database_dir(void);
 void log_transaction(const char *action);
