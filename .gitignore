@@ -4,12 +4,24 @@ banking_system.exe
 *.out
 *.o
 
-# Database files (optional - include if you want to track test data)
+# Build directory
+build/
+
+# Database files
 database/
+
+# Text documents
+*.txt
+*.pdf
+*.doc
+*.docx
+*.md
 
 # IDE and editor files
 .vscode/
 .idea/
+.zencoder/
+.zenflow/
 *.swp
 *.swo
 *~

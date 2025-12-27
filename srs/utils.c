@@ -1,6 +1,3 @@
-/*
- * utils.c - Utility functions implementation
- */
 
 #include "utils.h"
 #include <stdio.h>
@@ -10,27 +7,24 @@
 #include <time.h>
 #include <errno.h>
 
-/*
- * Clear input buffer
- */
 void clear_input_buffer(void) {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
 
-/*
- * Get string input from user with validation
- */
 bool get_string_input(char *buffer, int max_len, const char *prompt) {
     printf("%s", prompt);
     if (fgets(buffer, max_len, stdin) == NULL) {
         return false;
     }
     
-    // Remove newline
-    buffer[strcspn(buffer, "\n")] = 0;
+    size_t len = strlen(buffer);
+    if (len > 0 && buffer[len - 1] == '\n') {
+        buffer[len - 1] = '\0';
+    } else {
+        clear_input_buffer();
+    }
     
-    // Check if empty
     if (strlen(buffer) == 0) {
         printf("Error: Input cannot be empty.\n");
         return false;
@@ -39,9 +33,6 @@ bool get_string_input(char *buffer, int max_len, const char *prompt) {
     return true;
 }
 
-/*
- * Get double input from user with validation
- */
 bool get_double_input(double *value, const char *prompt) {
     char input[100];
     printf("%s", prompt);
@@ -54,7 +45,6 @@ bool get_double_input(double *value, const char *prompt) {
     errno = 0;
     *value = strtod(input, &endptr);
     
-    // Check for conversion errors
     if (endptr == input || (*endptr != '\0' && *endptr != '\n')) {
         printf("Error: Invalid input. Please enter a number.\n");
         return false;
@@ -68,9 +58,6 @@ bool get_double_input(double *value, const char *prompt) {
     return true;
 }
 
-/*
- * Get integer input from user with validation
- */
 bool get_int_input(int *value, const char *prompt) {
     double temp;
     if (!get_double_input(&temp, prompt)) {
@@ -86,9 +73,6 @@ bool get_int_input(int *value, const char *prompt) {
     return true;
 }
 
-/*
- * Validate PIN format
- */
 bool is_valid_pin(const char *pin) {
     if (strlen(pin) != PIN_LEN) {
         return false;
@@ -103,9 +87,6 @@ bool is_valid_pin(const char *pin) {
     return true;
 }
 
-/*
- * Validate amount
- */
 bool is_valid_amount(double amount, double max) {
     if (amount <= 0) {
         printf("Error: Amount must be greater than RM0.\n");
@@ -120,9 +101,6 @@ bool is_valid_amount(double amount, double max) {
     return true;
 }
 
-/*
- * Create database directory if it doesn't exist
- */
 void create_database_dir(void) {
     #ifdef _WIN32
         system("if not exist database mkdir database");
@@ -131,9 +109,6 @@ void create_database_dir(void) {
     #endif
 }
 
-/*
- * Log transaction to transaction.log file
- */
 void log_transaction(const char *action) {
     FILE *fp = fopen(TRANSACTION_LOG, "a");
     if (fp == NULL) {
@@ -151,16 +126,10 @@ void log_transaction(const char *action) {
     fclose(fp);
 }
 
-/*
- * Convert account type to string
- */
 const char* account_type_to_string(AccountType type) {
     return (type == SAVINGS) ? "Savings" : "Current";
 }
 
-/*
- * Convert string to account type
- */
 AccountType string_to_account_type(const char *str) {
     char lower[50];
     int i;

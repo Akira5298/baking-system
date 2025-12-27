@@ -1,7 +1,3 @@
-/*
- * menu.c - Menu functions implementation
- */
-
 #include "menu.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,9 +5,6 @@
 #include <ctype.h>
 #include <time.h>
 
-/*
- * Display the main menu
- */
 void display_menu(void) {
     printf("\n");
     printf("========================================\n");
@@ -27,9 +20,6 @@ void display_menu(void) {
     printf("Enter your choice (number or keyword): ");
 }
 
-/*
- * Display session information (date/time and account count)
- */
 void display_session_info(int account_count) {
     time_t now = time(NULL);
     struct tm *t = localtime(&now);
@@ -43,9 +33,6 @@ void display_session_info(int account_count) {
     printf("========================================\n");
 }
 
-/*
- * Get menu choice from user (supports both numbers and keywords)
- */
 int get_menu_choice(void) {
     char input[100];
     
@@ -53,10 +40,14 @@ int get_menu_choice(void) {
         return -1;
     }
     
-    // Remove newline
-    input[strcspn(input, "\n")] = 0;
+    size_t len = strlen(input);
+    if (len > 0 && input[len - 1] == '\n') {
+        input[len - 1] = '\0';
+    } else {
+        int c;
+        while ((c = getchar()) != '\n' && c != EOF);
+    }
     
-    // Convert to lowercase for keyword matching
     char lower[100];
     int i;
     for (i = 0; input[i] && i < 99; i++) {
@@ -64,14 +55,12 @@ int get_menu_choice(void) {
     }
     lower[i] = '\0';
     
-    // Try to parse as number first
     char *endptr;
     long num = strtol(input, &endptr, 10);
     if (*endptr == '\0' && num >= 1 && num <= 6) {
         return (int)num;
     }
     
-    // Check for keywords
     if (strstr(lower, "create") != NULL) return 1;
     if (strstr(lower, "delete") != NULL || strstr(lower, "remove") != NULL) return 2;
     if (strstr(lower, "deposit") != NULL) return 3;
@@ -79,5 +68,5 @@ int get_menu_choice(void) {
     if (strstr(lower, "remit") != NULL || strstr(lower, "transfer") != NULL) return 5;
     if (strstr(lower, "exit") != NULL || strstr(lower, "quit") != NULL) return 6;
     
-    return -1; // Invalid choice
+    return -1;
 }
