@@ -189,7 +189,6 @@ void log_transaction(const char *action) {
  */
 int get_menu_choice(void) {
     char input[100];
-    int choice;
     
     if (fgets(input, sizeof(input), stdin) == NULL) {
         return -1;
