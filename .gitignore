@@ -1,0 +1,26 @@
+# Compiled executables
+banking_system
+banking_system.exe
+*.out
+*.o
+
+# Database files (optional - include if you want to track test data)
+database/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Mac OS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Backup files
+*.bak
+*.backup
