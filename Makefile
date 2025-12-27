@@ -4,18 +4,30 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -std=c99 -pedantic
 TARGET = banking_system
-SRC = main.c
+
+# Source files
+SRC = main.c menu.c account.c transaction.c utils.c
+
+# Object files
+OBJ = $(SRC:.c=.o)
+
+# Header files
+HEADERS = types.h menu.h account.h transaction.h utils.h
 
 # Default target
 all: $(TARGET)
 
 # Build the executable
-$(TARGET): $(SRC)
-	$(CC) $(CFLAGS) -o $(TARGET) $(SRC)
+$(TARGET): $(OBJ)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJ)
+
+# Compile source files to object files
+%.o: %.c $(HEADERS)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 # Clean build artifacts
 clean:
-	rm -f $(TARGET)
+	rm -f $(TARGET) $(OBJ)
 	rm -rf database
 
 # Run the program
