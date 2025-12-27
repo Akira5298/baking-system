@@ -1,6 +1,7 @@
 /*
-All financial transactions, including deposits, withdrawals, 
-and transfers (remittances), are managed by this file. (It's like a bank cashier)
+ * All financial transactions, including deposits, withdrawals, 
+ * and transfers (remittances), are managed by this file. (It's like a bank cashier)
+ */
 
 #include "transaction.h"
 #include "account.h"
@@ -9,14 +10,14 @@ and transfers (remittances), are managed by this file. (It's like a bank cashier
 #include <string.h>
 
 
- /* Users can deposit money to their accounts using this function 
-  
-   Process:
-     1. Obtain the account number and PIN
-     2. Authenticate user
-     3. Obtain and verify the deposit amount
-     4. Add money to balance
-     5. Save updated account
+/* Users can deposit money to their accounts using this function 
+ *  
+ * Process:
+ *   1. Obtain the account number and PIN
+ *   2. Authenticate user
+ *   3. Obtain and verify the deposit amount
+ *   4. Add money to balance
+ *   5. Save updated account
  */
 void deposit(void) {
     char account_num[20];     
