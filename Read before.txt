@@ -1,0 +1,28 @@
+<IMPORTANT>
+
+How to Run This Program:
+
+Don't double-click the banking_system file!
+
+The executable will launch from your home directory rather than the project folder if you simply double-click it. This is problematic because the application creates a separate database in the incorrect location. After all, it searches the current directory for a folder named "database".
+
+How to run it properly:
+
+On the terminal, navigate to this folder:
+   cd/path/to/Banking_System_Coursework
+
+and run this program
+   ./banking_system
+
+In this manner, the application locates or creates the database in the correct location and runs from the appropriate folder (the creation of the database folder is done automatically, and all the account files will be saved there).
+
+
+How to Reset Everything:
+
+If you want to delete all accounts and start fresh:
+   make reset
+
+Or you can manually delete the database folder:
+   rm -rf database
+
+The next time you run the program, it will create a new empty database.
